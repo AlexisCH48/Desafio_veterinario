@@ -8,10 +8,22 @@
 
 require 'faker'
 
+10.times do |x|
+    Client.create(
+        name:Faker::Name.name,
+        phone_number: Faker::Number.number(digits: 9),
+        email:Faker::Internet.email
+    )
+end
+
+clients = Client.all
+
 10.times do |i|
     Pet.create(
         name: Faker::Creature::Dog.name,
         race: Faker::Creature::Dog.breed,
-        birthdate: Faker::Date.between(from: '2015-01-01', to: '2021-12-31')
+        birthdate: Faker::Date.between(from: '2015-01-01', to: '2021-12-31'),
+        client_id: clients.sample.id
     )
 end
+
