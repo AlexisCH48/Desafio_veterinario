@@ -30,12 +30,12 @@ class PetHistoriesController < ApplicationController
   # POST /pet_histories.json
   def create
     @pet = Pet.find(params[:pet_id].to_i)
-    @pet_history.pet = @pet
     @pet_history = PetHistory.new(pet_history_params)
+    @pet_history.pet = @pet
 
     respond_to do |format|
       if @pet_history.save
-        format.html { redirect_to pet_pet_history_path(@pet, pet_history), notice: 'Pet history was successfully created.' }
+        format.html { redirect_to pet_pet_history_path(@pet, @pet_history), notice: 'Pet history was successfully created.' }
         format.json { render :show, status: :created, location: @pet_history }
       else
         format.html { render :new }
